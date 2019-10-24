@@ -35,11 +35,11 @@ class SearchActivity : AppCompatActivity(), IRecycleController {
 
         val searchItem = menu?.findItem(R.id.search_menu)
         val searchView = searchItem?.actionView as SearchView
-        searchView.setOnQueryTextListener(queryListener())
+        searchView.setOnQueryTextListener(QueryListener())
         searchView.imeOptions = EditorInfo.IME_ACTION_DONE
         return true
     }
-    inner class queryListener(): SearchView.OnQueryTextListener{
+    inner class QueryListener: SearchView.OnQueryTextListener{
         override fun onQueryTextChange(newText: String?): Boolean {
             adapter.filter.filter(newText)
             return false
