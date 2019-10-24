@@ -14,12 +14,12 @@ import com.example.recyclingapp.Model.RecycleWays
 import kotlinx.android.synthetic.main.activity_search.*
 
 class SearchActivity : AppCompatActivity(), IRecycleController {
-    override lateinit var recycles: IRecycleRepository
+
+    override val recycles = RecycleRepository()
     val adapter = RecycleAdapter(this, recycles.getAll())
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
-        recycles = RecycleRepository()
 
         //Bind the recycler
 
