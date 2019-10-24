@@ -4,4 +4,5 @@
     <string name="directions">You may use the buttons below to either scan an item using your camera, or to search for an item to see how that item should be recycled.</string>
     <string name="scan_btn_text">Scan Using Camera</string>
     <string name="search_btn_text">Search for Items</string>
+    <string name="how_to_label">How to Dispose:</string>
 </resources>

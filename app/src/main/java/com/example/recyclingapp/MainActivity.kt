@@ -10,15 +10,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        scan_btn.setOnClickListener { scan_btn_click() }
-        search_btn.setOnClickListener { search_btn_click() }
+        scan_btn.setOnClickListener { launchScanActivity() }
+        search_btn.setOnClickListener { launchSearchActivity() }
     }
-    private fun scan_btn_click(){
+    private fun launchScanActivity(){
         val intent = Intent(this, ScanCameraActivity::class.java)
         startActivity(intent)
     }
 
-    private fun search_btn_click(){
+    fun launchSearchActivity(){
         val intent = Intent(this, SearchActivity::class.java)
         startActivity(intent)
     }
