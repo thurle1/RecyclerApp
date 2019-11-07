@@ -53,6 +53,7 @@ class RecycleAdapter(private val controller : IRecycleController, private val fu
 
         override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
             controller.recycles.clear()
+
             controller.recycles.addAll(results?.values as List<Recycle>)
             notifyDataSetChanged()
         }
