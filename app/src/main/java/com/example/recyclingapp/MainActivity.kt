@@ -19,9 +19,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         scan_btn.setOnClickListener { launchScanActivity() }
         search_btn.setOnClickListener { launchSearchActivity() }
-        awsSyncClient = AWSAppSyncClient.builder().context(applicationContext).awsConfiguration(
-            AWSConfiguration(applicationContext)
-        ).build()
+
 
 
     }

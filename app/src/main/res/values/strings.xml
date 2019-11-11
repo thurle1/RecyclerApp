@@ -5,4 +5,6 @@
     <string name="scan_btn_text">Scan Using Camera</string>
     <string name="search_btn_text">Search for Items</string>
     <string name="how_to_label">How to Dispose:</string>
+    <string name="camera_tv">Click the button below to scan an image</string>
+    <string name="camera_btn">Scan Image</string>
 </resources>
