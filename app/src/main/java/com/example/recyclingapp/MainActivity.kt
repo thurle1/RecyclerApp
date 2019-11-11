@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         awsSyncClient = AWSAppSyncClient.builder().context(applicationContext).awsConfiguration(
             AWSConfiguration(applicationContext)
         ).build()
-        
+
 
     }
     private fun launchScanActivity(){
