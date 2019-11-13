@@ -52,29 +52,17 @@ class ScanCameraActivity : AppCompatActivity() {
         when(requestCode){
             CAMERA_INTENT -> {
                 if(resultCode == Activity.RESULT_OK){
-                    //setPic()
+                    setPic()
                 }
             }
         }
     }
 
     private fun setPic(){
-        val targetW = camera_iv.width
-        val targetH = camera_iv.height
-        val bmOptions = BitmapFactory.Options().apply {
-            inJustDecodeBounds = true
-            val photoW = outWidth
-            val photoH = outHeight
-
-            val scaleFactor = Math.min(photoW/targetW, photoH/targetH)
-
-            inJustDecodeBounds = false
-            inSampleSize = scaleFactor
-            inPurgeable = true
-
-        }
-        BitmapFactory.decodeFile(currentPhotoPath, bmOptions)?.also { bitmap ->
-            camera_iv.setImageBitmap(bitmap)
+        var imgFile = File(currentPhotoPath)
+        if(imgFile.exists()){
+            val myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
+            camera_iv.setImageBitmap(myBitmap)
         }
     }
 
