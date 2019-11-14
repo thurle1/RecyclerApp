@@ -20,6 +20,8 @@ class RecycleRepository: IRecycleRepository {
         recycleList.add(Recycle("Coffee Grinds", RecycleWays.COMPOST))
         recycleList.add(Recycle("Cardboard Box", RecycleWays.RECYCLE))
         recycleList.add(Recycle("Used Napkins", RecycleWays.COMPOST))
+        recycleList.add(Recycle("Bottle", RecycleWays.RECYCLE))
+        recycleList.add(Recycle("cardboard", RecycleWays.RECYCLE))
     }
 
     override fun getAll(): List<Recycle> {
@@ -40,5 +42,33 @@ class RecycleRepository: IRecycleRepository {
 
     override fun addAll(list: List<Recycle>) {
         recycleList.addAll(list)
+    }
+
+    override fun contains(name: String): Boolean {
+        for(item: Recycle in recycleList){
+            if(item.name.contains(name, true)){
+                return true
+            }
+        }
+        return false
+    }
+
+    override fun getRecycleMethod(name: String): String {
+        for(item: Recycle in recycleList){
+            if(item.name.contains(name, true)){
+                return when(item.howToRecycle){
+                    RecycleWays.RECYCLE -> {
+                        "Recycle"
+                    }
+                    RecycleWays.COMPOST -> {
+                        "Compost"
+                    }
+                    RecycleWays.LANDFILL -> {
+                        "Landfill"
+                    }
+                }
+            }
+        }
+        return "Item Not In Database"
     }
 }

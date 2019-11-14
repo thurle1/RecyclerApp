@@ -8,4 +8,6 @@ interface IRecycleRepository{
     fun getAll(): List<Recycle>
     fun clear()
     fun addAll(list: List<Recycle>)
+    fun contains(name: String): Boolean
+    fun getRecycleMethod(name: String): String
 }

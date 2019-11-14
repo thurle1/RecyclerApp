@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import androidx.core.content.FileProvider
+import androidx.core.view.isVisible
 import com.amazonaws.auth.AWSCredentials
 import com.amazonaws.auth.BasicAWSCredentials
 import kotlinx.android.synthetic.main.activity_scan_camera.*
@@ -26,6 +27,7 @@ import com.amazonaws.services.rekognition.model.DetectLabelsResult
 import com.amazonaws.services.rekognition.model.Image
 import com.amazonaws.services.rekognition.model.Label
 import com.amazonaws.util.IOUtils
+import kotlinx.android.synthetic.main.recycle_recycler_view.*
 import java.io.FileInputStream
 import java.lang.ref.WeakReference
 import java.nio.ByteBuffer
@@ -35,10 +37,19 @@ import kotlin.concurrent.thread
 class ScanCameraActivity : AppCompatActivity() {
 
 
+    lateinit var recycleRepository: RecycleRepository
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scan_camera)
         camera_btn.setOnClickListener { cameraClick() }
+        recycleRepository = RecycleRepository()
+        saw_label.isVisible = false
+        confidence_lbl.isVisible = false
+        disp_meth_lbl.isVisible = false
+        saw_tv.isVisible = false
+        confidence_Tv.isVisible = false
+        disposal_meth_Tv.isVisible = false
     }
 
     private fun cameraClick(){
@@ -114,10 +125,20 @@ class ScanCameraActivity : AppCompatActivity() {
                 var labels = result?.labels
                 if (labels != null) {
                     for(myLabel: Label in labels){
-                        if(myLabel.name == "Bottle"){
-                            act.get()?.textViewResult?.text = myLabel.name
+                        val isFound = act.get()?.recycleRepository?.contains(myLabel.name)
+                        if(isFound != null){
+                            if(isFound){
+                                act.get()?.saw_label?.isVisible = true
+                                act.get()?.confidence_lbl?.isVisible = true
+                                act.get()?.disp_meth_lbl?.isVisible = true
+                                act.get()?.saw_tv?.isVisible = true
+                                act.get()?.confidence_Tv?.isVisible = true
+                                act.get()?.disposal_meth_Tv?.isVisible = true
+                                act.get()?.saw_tv?.text = myLabel.name
+                                act.get()?.confidence_Tv?.text = myLabel.confidence.toString().subSequence(0, 5)
+                                act.get()?.disposal_meth_Tv?.text = act.get()?.recycleRepository?.getRecycleMethod(myLabel.name)
+                            }
                         }
-
                     }
                 }
             }
