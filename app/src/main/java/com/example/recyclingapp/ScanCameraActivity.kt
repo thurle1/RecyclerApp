@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.view.View
 import androidx.core.content.FileProvider
 import androidx.core.view.isVisible
 import com.amazonaws.auth.AWSCredentials
@@ -50,6 +51,7 @@ class ScanCameraActivity : AppCompatActivity() {
         saw_tv.isVisible = false
         confidence_Tv.isVisible = false
         disposal_meth_Tv.isVisible = false
+        progressBar.visibility = View.GONE
     }
 
     private fun cameraClick(){
@@ -120,6 +122,17 @@ class ScanCameraActivity : AppCompatActivity() {
                 return result
             }
 
+            override fun onPreExecute() {
+                super.onPreExecute()
+                act.get()?.progressBar?.visibility = View.VISIBLE
+                act.get()?.saw_label?.isVisible = false
+                act.get()?.confidence_lbl?.isVisible = false
+                act.get()?.disp_meth_lbl?.isVisible = false
+                act.get()?.saw_tv?.isVisible = false
+                act.get()?.confidence_Tv?.isVisible = false
+                act.get()?.disposal_meth_Tv?.isVisible = false
+            }
+
             override fun onPostExecute(result: DetectLabelsResult?) {
                 super.onPostExecute(result)
                 var labels = result?.labels
@@ -137,6 +150,8 @@ class ScanCameraActivity : AppCompatActivity() {
                                 act.get()?.saw_tv?.text = myLabel.name
                                 act.get()?.confidence_Tv?.text = myLabel.confidence.toString().subSequence(0, 5)
                                 act.get()?.disposal_meth_Tv?.text = act.get()?.recycleRepository?.getRecycleMethod(myLabel.name)
+                                act.get()?.progressBar?.visibility = View.GONE
+                                break
                             }
                         }
                     }
