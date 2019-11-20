@@ -107,7 +107,7 @@ class ScanCameraActivity : AppCompatActivity() {
         val CAMERA_INTENT = 1
         class MyTask(var act: WeakReference<ScanCameraActivity>) : AsyncTask<String, Int, DetectLabelsResult>(){
             override fun doInBackground(vararg params: String?): DetectLabelsResult {
-                var credentials = BasicAWSCredentials("AKIA3VBM2BXF4FRUO2GQ", "a6MZ/QLOsDNJexBls5S7gm8FzutDr0PvD0Fpwe2C")
+                var credentials = BasicAWSCredentials("My", "AWS CREDENTIALS")
                 var client = AmazonRekognitionClient(credentials)
                 var imageBytes: ByteBuffer
                 var request = DetectLabelsRequest()
